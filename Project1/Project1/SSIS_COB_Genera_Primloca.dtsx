@@ -1,0 +1,3114 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/18/2007 7:38:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MTYCORSIS20"
+  DTS:CreatorName="ABASEGMTY\FELIXG"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{31881123-ED0B-48F3-9043-89EAE852D842}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.121"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="SSIS_COB_Genera_Primloca"
+  DTS:PackageType="5"
+  DTS:VersionBuild="130"
+  DTS:VersionGUID="{983FABC5-2DA5-4083-BC85-D86D9B105822}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_CAR]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{1B67ABB7-87EA-4B8B-A643-EB6042D9B4DD}"
+      DTS:ObjectName="DS_CAR">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::sConnection]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQLSEGMTY1;User ID=Dtsxadmin;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Pwd"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAvSUWlHJZAEG+SyOIeFgo1gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAPNfmFcZ4rLRDejYGEoKbeAAAAAASAAACgAAAAEAAAAEv2uNE8xgthVhg4XHxvfLoYAAAATAZyLN3nJglCHCXn5gwJUwMCc2ERiVglFAAAADQkppFhtsQSmBj6GimbQbAdcKk7</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_Configuracion]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{222D5796-6C4A-4E76-A8DC-1B5BE5AE2366}"
+      DTS:ObjectName="DS_Configuracion">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=abasegssis03;Initial Catalog=Configuracion;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DS_IS_Log]"
+      DTS:CreationName="FILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{079EA1C7-9C4E-40BA-AC23-717B55B6A236}"
+      DTS:ObjectName="DS_IS_Log">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::VPC_RutaLog] + "\\" +  @[System::PackageName] + SUBSTRING((DT_WSTR, 30) ( GETDATE()), 1, 10)  + ".Log"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="\\abasegssis03\ssis\logs\SSIS_COB_Genera_Primloca2023-01-31.Log" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PRIMLOCA]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{8FCEF646-6A85-44DE-A89D-FFC37E206590}"
+      DTS:ObjectName="PRIMLOCA">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::PathFile]  + @[$Package::PRIMLOCA_CON]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\Fssegmty1\CobranzaMTY\PRIMLOCA.TXT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tipo"
+              DTS:DTSID="{D576806E-005C-4495-A396-BB819614139C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dias"
+              DTS:DTSID="{CE6C23FF-FE16-47D1-9A04-2B9D55847993}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="18"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Moneda"
+              DTS:DTSID="{C8929321-25B6-4851-8120-FD04FE923F0C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Plaza"
+              DTS:DTSID="{72B9D15E-712A-4432-BD52-8E76C4AD1205}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Ramo"
+              DTS:DTSID="{1855E77A-1314-4953-91D6-D15EAAFEB801}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="3"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Clave"
+              DTS:DTSID="{445D55A5-EF4D-4148-9CCE-3C0B848129DF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Sucursal"
+              DTS:DTSID="{B027AE0E-5C82-45E0-8990-D0CEB4E0FA4B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Poliza"
+              DTS:DTSID="{9C508226-48D4-42FC-803A-DA85ABD0B2D7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Endoso"
+              DTS:DTSID="{034F4248-1F31-44E0-B1EE-DDEDFB2A3354}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Inciso"
+              DTS:DTSID="{49ACF479-A2CF-4B72-8686-38FDEF50B2EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="17"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Recibo"
+              DTS:DTSID="{F1AB59DE-2889-4B88-80D9-336011DB18E8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="17"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TotalRecibos"
+              DTS:DTSID="{6180279A-D5F8-4E5C-9A74-EE288E20BB09}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Prima Neta"
+              DTS:DTSID="{7BD5356E-D73A-4F2C-835D-DF09CCD0CC56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Recargo"
+              DTS:DTSID="{82268D75-953B-4AAF-9BF4-82FA6CCDC47A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Derechos"
+              DTS:DTSID="{3EF8D8AE-5CCC-4AA9-916D-21A15FAA0A33}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Iva"
+              DTS:DTSID="{1C1A4D70-FE4A-4C3C-B5F3-BBEE85441969}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Comision"
+              DTS:DTSID="{5FD0BEEB-393C-4F0C-9599-CB310CB7F34A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Comison Sobre Recargo"
+              DTS:DTSID="{F5CF0034-3ED5-4CA5-8B57-FE71121AB8B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Prima Total"
+              DTS:DTSID="{76B70E09-7146-4EF9-8608-0FD83DEA2325}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="18"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Forma de Pago"
+              DTS:DTSID="{F563EB7E-756A-4B36-9F90-DD21AF6735CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Inicio Vigencia"
+              DTS:DTSID="{E78B4DC1-DBC5-47C5-9C6A-6D947366450C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fin Vigencia"
+              DTS:DTSID="{72FAC592-1210-4D3E-869E-221CB6C4C693}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fecha Emision"
+              DTS:DTSID="{FBAB6B29-0716-4AC7-BE3B-B0D116D67EE5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Agente"
+              DTS:DTSID="{1B4CEF6E-49B9-46BE-96DA-FCD8A2E10031}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nombre Agente"
+              DTS:DTSID="{169631E5-095B-4BD6-838B-F2DE6D62BECC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Conducto"
+              DTS:DTSID="{683E97A1-FC2C-4727-8803-4664821B7186}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nombre Conducto"
+              DTS:DTSID="{E4CDAAA6-731C-4ED6-B279-9D17ADAFC95B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Asegurado"
+              DTS:DTSID="{D69054A3-7EE2-4482-99CD-4BB7D3E5630C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nombre Asegurado"
+              DTS:DTSID="{929F0FCE-45F8-441B-8706-8128032868EE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Fecha"
+              DTS:DTSID="{4C98F845-02ED-477F-9E16-C829E299EAD4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Referencia"
+              DTS:DTSID="{5B643B4E-8ED1-4AFC-99E9-6B8EF0C598A4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DescPaquete"
+              DTS:DTSID="{315AC026-68D9-4A29-8CFB-165DFEEBE65C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DescripcionMTC"
+              DTS:DTSID="{44DCE206-499F-4F18-87CA-96229F08DF96}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Modelo"
+              DTS:DTSID="{B0F642E4-1BEA-4954-A61D-9A8D2DA0B118}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Serie"
+              DTS:DTSID="{E2083558-E2DB-44D5-A253-B304AFA9EFF5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Motor"
+              DTS:DTSID="{65674B81-CF9A-4AD1-9AC4-FA707410CB44}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="60"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Propietario"
+              DTS:DTSID="{B90B9292-97F5-4A6F-803A-E0ADB8D7185A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TipoSiniestro"
+              DTS:DTSID="{0AC0C90D-CE42-4EA5-B9DC-0D0B8AF522CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LimiteFecha"
+              DTS:DTSID="{92414EE9-44CE-4013-9650-264F9B56C78B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TipoEndoso"
+              DTS:DTSID="{B7E57C57-61C8-4DE1-A37A-D904980BE403}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Placas"
+              DTS:DTSID="{1FC19CAC-4CEF-4A3A-A9EF-B0D1540E5CF8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MTC"
+              DTS:DTSID="{5ADDE601-BA2C-465C-93CD-AD0F46E21AEB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PrimaTotalInciso"
+              DTS:DTSID="{DABD1516-DFD0-4036-A98C-0D8EAA63E744}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Producto"
+              DTS:DTSID="{4C31B6E3-78D0-4956-868A-D90DF1514F5A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="28"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TipoPolizaInternacional"
+              DTS:DTSID="{07D6BD6E-AFB8-4E2A-9B5D-AC3AC36EF4D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LineaNegocio"
+              DTS:DTSID="{3B2633CC-C9E9-42C9-BF47-F9F357CA4F41}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DiasGracia"
+              DTS:DTSID="{BC04031B-D0FA-4349-9F08-66D36E579966}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DiasProrroga"
+              DTS:DTSID="{F5D418B2-6C97-4ACA-A003-210CF9B47752}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="120"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AgrupacionNom"
+              DTS:DTSID="{DB37DFB9-96D8-4D6C-BCF1-E8404B3C3E11}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="SSIS_Configuracion"
+      DTS:ConfigurationType="2"
+      DTS:ConfigurationVariable="\Package.Connections[DS_Configuracion].Properties[ConnectionString]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD5B6936-E25A-4033-960C-DFA9603B677F}"
+      DTS:ObjectName="Servidor de Configuración" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DS_Configuracion&quot;;&quot;[dbo].[vw_SSIS_Configuracion]&quot;;&quot;SSIS_COB_Genera_Primloca&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{0D5E0D09-FF09-49C6-A8DE-AE51031B487F}"
+      DTS:ObjectName="Configuación - SSIS_COB_Genera_Primloca" />
+  </DTS:Configurations>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="DS_IS_Log"
+      DTS:CreationName="Microsoft.LogProviderTextFile"
+      DTS:Description="Writes log entries for events to a CSV file"
+      DTS:DTSID="{B8B5D387-C8E0-49E6-981E-F0B040400E8C}"
+      DTS:ObjectName="SSIS log provider for Text files">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{307AED88-9F36-4AED-9394-BF610646585A}"
+      DTS:ObjectName="DS_CAR_ConnectionString">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Data Source=SQLDEVMTY1;User ID=dtsmgr;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{A6EE70E0-5F70-4486-A22A-A0E888898795}"
+      DTS:ObjectName="PRIMLOCA_CON">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">PRIMLOCA.TXT</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{FD6A2475-BEAF-4B5E-BF84-186C888571D3}"
+      DTS:ObjectName="PRIMLOCA_ConnectionString">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\sqldevssis01\DTSX\Cobranza\Reportes\PRIMLOCA.TXT</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C35D7CA6-B5C6-4B9A-B389-59C0149FAC83}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="OficinaId">
+      <DTS:VariableValue
+        DTS:DataType="3">3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1DE844DE-8282-41B0-B2FC-441B89417A4B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackagePath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E25BAB12-FDDA-4E9F-BB22-BC23C5D2C8D7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PathFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Fssegmty1\CobranzaMTY\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{021BD7FA-8112-4E80-8232-A1A0D204DE05}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PathFileGDL">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Fssegmty1\CobranzaGDL\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{06F602C4-EA2E-4CDB-9E17-A24CE3D96266}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PathFileMEX">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Fssegmty1\CobranzaMEX\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{50C3EC3A-80CA-40B8-BDB1-C9BF03F45511}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PathFileMTY">
+      <DTS:VariableValue
+        DTS:DataType="8">\\Fssegmty1\CobranzaMTY\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC3BBB51-947C-44BB-B589-9B131F46A09A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sConnection">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=SQLSEGMTY1;User ID=Dtsxadmin;Pwd=p!96EcTx@2d;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4E288D7C-C37C-4E66-AD86-FCA7C1D20D9A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sConnectionGDL">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=SQLSEGGDL;User ID=Dtsxadmin;Pwd=p!96EcTx@2d;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8AB861DB-FDFA-43CF-97F9-0900534B2E79}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sConnectionMEX">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=SQLSEGMEX;User ID=Dtsxadmin;Pwd=p!96EcTx@2d;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{914D998D-068F-43E9-878A-4C1DBEB3BB32}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sConnectionMTY">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=SQLSEGMTY1;User ID=Dtsxadmin;Pwd=p!96EcTx@2d;Initial Catalog=Cartera;Provider=SQLNCLI11.1;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7FAE2AF7-F89A-41B3-ACE9-DB78C3BCDD54}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VPC_RutaLog">
+      <DTS:VariableValue
+        DTS:DataType="8">\\abasegssis03\ssis\logs</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">7,18,OnPipelineRowsSent,7,OnError,13,OnInformation,10,OnProgress,13,OnQueryCancel,12,OnTaskFailed,9,OnWarning</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPipelineRowsSent"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnProgress"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnQueryCancel"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{B8B5D387-C8E0-49E6-981E-F0B040400E8C}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Carga PrimLoca"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B2442ACC-F6B0-4C1A-BA9C-91EA1DC5021C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Carga PrimLoca"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1B67ABB7-87EA-4B8B-A643-EB6042D9B4DD}"
+          SQLTask:SqlStatementSource="Declare @fecha char(30),  &#xA; @now char(20)&#xA;&#xA;Select  @now = DATEADD(DAY, -1, Getdate())&#xA;select  @fecha = substring(@now,1,12) + '11:59 PM'&#xA;&#xA;Exec  spGeneraReportePrima 1,@fecha,1&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Genera Archivo PrimLoca"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2F8E57AB-7ACD-4131-A11F-B1E38B2497F1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Genera Archivo PrimLoca"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferMaxRows="30000"
+          defaultBufferSize="31457280"
+          engineThreads="15"
+          version="1">
+          <components>
+            <component
+              refId="Package\Genera Archivo PrimLoca\Cartera"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Cartera"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">;WITH cte_AgrupacionNomAuto AS(
+	SELECT A.ClaveId, A.PolizaId, C.DescripcionLarga COLLATE DATABASE_DEFAULT AS AgrupacionNom
+	FROM AUTO.DBO.Poliza A WITH (NOLOCK)
+		INNER JOIN LSMTY_ABA.Abaseguros.Emision.Poliza B WITH (NOLOCK)
+			ON A.ClaveId = B.ClaveId COLLATE DATABASE_DEFAULT AND A.PolizaId = B.PolizaId
+		LEFT join LSMTY_ABA.Abaseguros.Producto.Agrupacion C WITH (NOLOCK)
+			ON B.AgrupacionId = C.AgrupacionId
+)
+, cte_AgrupacionNomDiverso AS(
+	SELECT DISTINCT PO.ClaveId, PO.PolizaId, MAX(AG.AgrupacionDsc) AS AgrupacionNom
+	FROM Diverso.dbo.Poliza PO WITH(NOLOCK)
+		INNER JOIN Diverso.dbo.Endoso EN WITH(NOLOCK) ON PO.PolizaFolio = EN.PolizaFolio
+		INNER JOIN Diverso.dbo.IncisoEndoso IEN WITH(NOLOCK) ON EN.PolizaFolio = IEN.PolizaFolio AND EN.EndosoId = IEN.EndosoId
+		INNER JOIN Diverso.dbo.CoberturaPorInciso CI WITH(NOLOCK) ON IEN.PolizaFolio = CI.PolizaFolio AND CI.IncisoId = IEN.IncisoId
+		LEFT JOIN Diverso.dbo.Agrupacion AG WITH(NOLOCK) ON CI.AgrupacionId = AG.AgrupacionId
+	GROUP BY PO.ClaveId, PO.PolizaId
+)
+, cte_ProrrogaMax AS(
+	SELECT ClaveId,PolizaId, MAX(ProrrogaId) AS ProrrogaId
+	FROM dbo.Prorroga WITH(NOLOCK)
+	WHERE ProrrogaStatusId = 1
+	GROUP BY ClaveId,PolizaId
+)
+, cte_Prorroga AS(
+	SELECT P.ClaveId, P.PolizaId, P.DiasProrrogaNo
+	FROM dbo.Prorroga P WITH(NOLOCK)
+	INNER JOIN cte_ProrrogaMax C ON P.ProrrogaId = C.ProrrogaId
+)
+
+SELECT 
+    Tipo = 'VENCIDO', Dias = Dias * (-1), 
+    Moneda = P.MonedaNom,P.Plaza,P.Ramo,Clave = P.ClaveId,Sucursal = P.SucursalId,Poliza = P.PolizaId, 
+    Endoso = P.EndosoId,Inciso = P.IncisoId,Recibo =P.ReciboId,P.TotalRecibos,'Prima Neta' = P.PNetaMto, 
+    Recargo = P.RecargoMto,Derechos = P.DerechoMto,Iva = P.IvaMto,Comision = P.ComisionMto,
+    'Comison Sobre Recargo' = P.ComisionSobreRecargoMto,'Prima Total' = P.PrimaTotalMto,
+    'Forma de Pago' = P.FormaPago, 'Inicio Vigencia' = Convert(varchar(10),P.InicioVigencia,103),
+    'Fin Vigencia' = Convert(varchar(10),P.FinVigencia,103), 
+    'Fecha Emision' = Convert(varchar(10),P.EmisionFecha,103), 
+    Agente = P.AgenteId, 'Nombre Agente' = convert(varchar(255),P.AgenteNom),
+    Conducto = P.ConductoId, 
+    'Nombre Conducto' = convert(varchar(255),P.ConductoNom),Asegurado = P.AseguradoId,
+    'Nombre Asegurado' =convert(varchar(255),P.AseguradoNom),
+    Fecha = CONVERT(VARCHAR (15),GETDATE()-1, 103),
+    LEFT(P.Referencia,15) AS Referencia
+	,P.DescPaquete,
+DescripcionMTC=P.DescripcionMTC,--dbo.Fn_OmitirCaracter(P.DescripcionMTC),
+P.Modelo,P.Serie,P.Motor,P.Propietario,
+    'TipoSiniestro' = CASE WHEN P.TipoSiniestroId &gt; 1 THEN 'SINIESTRO' ELSE 
+    CASE WHEN P.TipoSiniestroId = 1 THEN 'SINIESTRO PT' ELSE '' END END,
+    LimiteFecha = Convert(varchar(10),P.LimiteFecha,103),P.TipoEndoso,P.Placas,P.MTC, 
+    ISNULL(P.PrimaTotalIncisoMto,0) AS 'PrimaTotalInciso' 
+    --MonedaId,RamoId,FormaPagoId, TipoSiniestroId,Plaza  
+    ,isnull(P.ProductoNom,'') as Producto
+    ,TipoPolizaInternacional = (SELECT CASE ISNULL(D.PROGRAMTYPE,2) 
+                        WHEN 0 THEN 'MULTINACIONAL - PAGO DIRECTO'
+                        WHEN 1 THEN 'MULTINACIONAL - BORDERAUX'
+                        WHEN 2 THEN ''
+                    END
+                FROM Seguro.dbo.PolizaMultinacionalDetalle D WITH(NOLOCK)            
+                WHERE D.EndosoID = P.EndosoID)
+    ,LineaNegocio=(
+		Select convert(Varchar(25),ln.Descripcion) 
+		FROM AUTO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId        
+		UNION
+		Select convert(Varchar(25),ln.Descripcion) 
+		FROM DIVERSO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId AND not exists(Select  PO.PolizaId,LN.LobSISid,PO.ClaveId,LN.Descripcion
+		FROM AUTO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId))
+
+	,CASE P.RamoId WHEN 3 THEN AGA.AgrupacionNom ELSE AGD.AgrupacionNom END AS AgrupacionNom
+	,CONVERT(VARCHAR(25),E.DiasGraciaIni) AS DiasGracia
+	,CONVERT(VARCHAR(25),PR.DiasProrrogaNo) AS DiasProrroga
+FROM tmpReportePrimas P WITH (NOLOCK)
+	INNER JOIN dbo.Recibo RE WITH (NOLOCK)
+		ON RE.PolizaId=P.PolizaId AND RE.ClaveId = P.ClaveId AND RE.endosoid = P.endosoid AND RE.IncisoId = P.IncisoId AND RE.ReciboId = P.ReciboId
+	INNER JOIN dbo.Endoso E WITH(NOLOCK) ON RE.ClaveId = E.ClaveId AND RE.PolizaId = E.PolizaId AND RE.EndosoId = E.EndosoId
+	LEFT JOIN cte_AgrupacionNomAuto AGA ON P.ClaveId = AGA.ClaveId AND P.PolizaId = AGA.PolizaId AND P.RamoId = 3
+	LEFT JOIN cte_AgrupacionNomDiverso AGD ON P.ClaveId = AGD.ClaveId AND P.PolizaId = AGD.PolizaId AND P.RamoId &lt;&gt; 3
+	LEFT JOIN cte_Prorroga PR ON PR.PolizaId = E.PolizaId AND PR.ClaveId = E.ClaveId
+WHERE 	P.Dias &lt; 0
+
+UNION ALL
+
+SELECT DISTINCT
+ 	Tipo = 'POR VENCER', Dias = P.Dias, 
+	Moneda = P.MonedaNom,P.Plaza,P.Ramo,Clave = P.ClaveId,Sucursal = P.SucursalId,Poliza = P.PolizaId, 
+    Endoso = P.EndosoId,Inciso = P.IncisoId,Recibo = P.ReciboId, P.TotalRecibos,'Prima Neta' = P.PNetaMto, 
+    Recargo = P.RecargoMto,Derechos = P.DerechoMto,Iva = P.IvaMto,Comision = P.ComisionMto,
+    'Comison Sobre Recargo' = P.ComisionSobreRecargoMto,'Prima Total' = P.PrimaTotalMto,
+	'Forma de Pago' = P.FormaPago, 'Inicio Vigencia' = Convert(varchar(10),P.InicioVigencia,103),
+    'Fin Vigencia' = Convert(varchar(10),P.FinVigencia,103), 
+	'Fecha Emision' = Convert(varchar(10),P.EmisionFecha,103), 
+    Agente = P.AgenteId, 'Nombre Agente' = convert(varchar(255),P.AgenteNom),
+	Conducto = P.ConductoId, 
+	'Nombre Conducto' = convert(varchar(255),P.ConductoNom),Asegurado = P.AseguradoId,
+	'Nombre Asegurado' =convert(varchar(255),P.AseguradoNom),
+	Fecha = CONVERT(VARCHAR (15),GETDATE()-1, 103),
+    LEFT(P.Referencia,15) AS Referencia
+	,P.DescPaquete,
+DescripcionMTC=P.DescripcionMTC,--dbo.Fn_OmitirCaracter(P.DescripcionMTC),
+P.Modelo,P.Serie,P.Motor,P.Propietario,
+	'TipoSiniestro' = CASE WHEN P.TipoSiniestroId &gt; 1 THEN 'SINIESTRO' ELSE 
+	CASE WHEN P.TipoSiniestroId = 1 THEN 'SINIESTRO PT' ELSE '' END END,
+    LimiteFecha = Convert(varchar(10),P.LimiteFecha,103),P.TipoEndoso,P.Placas,P.MTC, 
+	ISNULL(P.PrimaTotalIncisoMto,0) AS 'PrimaTotalInciso'  
+     	--MonedaId,RamoId,FormaPagoId, TipoSiniestroId,Plaza  
+	,isnull(P.ProductoNom,'') as Producto
+		,TipoPolizaInternacional = (SELECT CASE ISNULL(D.PROGRAMTYPE,2) 
+						WHEN 0 THEN 'MULTINACIONAL - PAGO DIRECTO'
+						WHEN 1 THEN 'MULTINACIONAL - BORDERAUX'
+						WHEN 2 THEN ''
+					END
+				FROM Seguro.dbo.PolizaMultinacionalDetalle D WITH(NOLOCK)			
+				WHERE D.EndosoID = P.EndosoID)
+	,LineaNegocio=(
+		Select convert(Varchar(25),ln.Descripcion) 
+		FROM AUTO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId		
+		UNION
+		Select convert(Varchar(25),ln.Descripcion) 
+		FROM DIVERSO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId AND not exists(Select PO.PolizaId,LN.LobSISid,PO.ClaveId,LN.Descripcion
+		FROM AUTO.DBO.POLIZA Po with (nolock)
+			INNER JOIN SEGURO.DBO.LineaNegocioSIS ln with (nolock) ON LN.LobSISid=Po.LobSISId
+		WHERE  Po.ClaveId=P.ClaveId AND Po.polizaid = P.PolizaId	))
+
+	,CASE P.RamoId WHEN 3 THEN AGA.AgrupacionNom ELSE AGD.AgrupacionNom END AS AgrupacionNom
+	,CONVERT(VARCHAR(25),E.DiasGraciaIni) AS DiasGracia
+	,CONVERT(VARCHAR(25),PR.DiasProrrogaNo) AS DiasProrroga
+	
+FROM tmpReportePrimas P  WITH (NOLOCK)
+	INNER JOIN dbo.Recibo RE WITH (NOLOCK)
+		ON RE.PolizaId=P.PolizaId AND RE.ClaveId = P.ClaveId AND RE.endosoid = P.endosoid AND RE.IncisoId = P.IncisoId AND RE.ReciboId = P.ReciboId
+	INNER JOIN dbo.Endoso E WITH(NOLOCK) ON RE.ClaveId = E.ClaveId AND RE.PolizaId = E.PolizaId AND RE.EndosoId = E.EndosoId
+	LEFT JOIN cte_AgrupacionNomAuto AGA ON P.ClaveId = AGA.ClaveId AND P.PolizaId = AGA.PolizaId AND P.RamoId = 3
+	LEFT JOIN cte_AgrupacionNomDiverso AGD ON P.ClaveId = AGD.ClaveId AND P.PolizaId = AGD.PolizaId AND P.RamoId &lt;&gt; 3
+	LEFT JOIN cte_Prorroga PR ON PR.PolizaId = E.PolizaId AND PR.ClaveId = E.ClaveId
+WHERE 	Dias &gt; = 0</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Genera Archivo PrimLoca\Cartera.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DS_CAR]"
+                  connectionManagerRefId="Package.ConnectionManagers[DS_CAR]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Tipo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Tipo]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Tipo]"
+                      name="Tipo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Dias]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Dias]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Dias]"
+                      name="Dias"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Moneda]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Moneda]"
+                      length="18"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Moneda]"
+                      name="Moneda"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Plaza]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Plaza]"
+                      length="50"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Plaza]"
+                      name="Plaza"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Ramo]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Ramo]"
+                      length="50"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Ramo]"
+                      name="Ramo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Clave]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Clave]"
+                      length="3"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Clave]"
+                      name="Clave"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Sucursal]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Sucursal]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Sucursal]"
+                      name="Sucursal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Poliza]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Poliza]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Poliza]"
+                      name="Poliza"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Endoso]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Endoso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Endoso]"
+                      name="Endoso"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inciso]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Inciso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inciso]"
+                      name="Inciso"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recibo]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Recibo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recibo]"
+                      name="Recibo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TotalRecibos]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TotalRecibos]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TotalRecibos]"
+                      name="TotalRecibos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Neta]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Prima Neta]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Neta]"
+                      name="Prima Neta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recargo]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Recargo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recargo]"
+                      name="Recargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Derechos]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Derechos]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Derechos]"
+                      name="Derechos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Iva]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Iva]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Iva]"
+                      name="Iva"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comision]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Comision]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comision]"
+                      name="Comision"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comison Sobre Recargo]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Comison Sobre Recargo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comison Sobre Recargo]"
+                      name="Comison Sobre Recargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Total]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Prima Total]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Total]"
+                      name="Prima Total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Forma de Pago]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Forma de Pago]"
+                      length="18"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Forma de Pago]"
+                      name="Forma de Pago"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inicio Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Inicio Vigencia]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inicio Vigencia]"
+                      name="Inicio Vigencia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fin Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fin Vigencia]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fin Vigencia]"
+                      name="Fin Vigencia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha Emision]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fecha Emision]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha Emision]"
+                      name="Fecha Emision"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Agente]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Agente]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Agente]"
+                      name="Agente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Agente]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Agente]"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Agente]"
+                      name="Nombre Agente"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Conducto]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Conducto]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Conducto]"
+                      name="Conducto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Conducto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Conducto]"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Conducto]"
+                      name="Nombre Conducto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Asegurado]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Asegurado]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Asegurado]"
+                      name="Asegurado"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Asegurado]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Asegurado]"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Asegurado]"
+                      name="Nombre Asegurado"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      length="15"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      name="Fecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Referencia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Referencia]"
+                      length="50"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Referencia]"
+                      name="Referencia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescPaquete]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DescPaquete]"
+                      length="20"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescPaquete]"
+                      name="DescPaquete"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescripcionMTC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DescripcionMTC]"
+                      length="100"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescripcionMTC]"
+                      name="DescripcionMTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Modelo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Modelo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Modelo]"
+                      name="Modelo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Serie]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Serie]"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Serie]"
+                      name="Serie"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Motor]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Motor]"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Motor]"
+                      name="Motor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Propietario]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Propietario]"
+                      length="60"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Propietario]"
+                      name="Propietario"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoSiniestro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoSiniestro]"
+                      length="12"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoSiniestro]"
+                      name="TipoSiniestro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LimiteFecha]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[LimiteFecha]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LimiteFecha]"
+                      name="LimiteFecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoEndoso]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoEndoso]"
+                      length="2"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoEndoso]"
+                      name="TipoEndoso"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Placas]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Placas]"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Placas]"
+                      name="Placas"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[MTC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[MTC]"
+                      length="6"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[MTC]"
+                      name="MTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[PrimaTotalInciso]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[PrimaTotalInciso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[PrimaTotalInciso]"
+                      name="PrimaTotalInciso"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Producto]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Producto]"
+                      length="30"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Producto]"
+                      name="Producto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoPolizaInternacional]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoPolizaInternacional]"
+                      length="28"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoPolizaInternacional]"
+                      name="TipoPolizaInternacional"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LineaNegocio]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[LineaNegocio]"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LineaNegocio]"
+                      name="LineaNegocio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasGracia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DiasGracia]"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasGracia]"
+                      name="DiasGracia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasProrroga]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DiasProrroga]"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasProrroga]"
+                      name="DiasProrroga"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[AgrupacionNom]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[AgrupacionNom]"
+                      length="120"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[AgrupacionNom]"
+                      name="AgrupacionNom"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Tipo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Tipo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Dias]"
+                      dataType="i4"
+                      name="Dias" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Moneda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Moneda" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Plaza]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Plaza" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Ramo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Ramo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Clave]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Clave" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Sucursal]"
+                      dataType="i2"
+                      name="Sucursal" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Poliza]"
+                      dataType="i4"
+                      name="Poliza" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Endoso]"
+                      dataType="i4"
+                      name="Endoso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Inciso]"
+                      dataType="i4"
+                      name="Inciso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Recibo]"
+                      dataType="ui1"
+                      name="Recibo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TotalRecibos]"
+                      dataType="ui1"
+                      name="TotalRecibos" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Prima Neta]"
+                      dataType="cy"
+                      name="Prima Neta" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Recargo]"
+                      dataType="cy"
+                      name="Recargo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Derechos]"
+                      dataType="cy"
+                      name="Derechos" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Iva]"
+                      dataType="cy"
+                      name="Iva" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Comision]"
+                      dataType="cy"
+                      name="Comision" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Comison Sobre Recargo]"
+                      dataType="cy"
+                      name="Comison Sobre Recargo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Prima Total]"
+                      dataType="cy"
+                      name="Prima Total" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Forma de Pago]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Forma de Pago" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Inicio Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Inicio Vigencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fin Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Fin Vigencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fecha Emision]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Fecha Emision" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Agente]"
+                      dataType="i4"
+                      name="Agente" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Agente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Agente" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Conducto]"
+                      dataType="i2"
+                      name="Conducto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Conducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Conducto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Asegurado]"
+                      dataType="i4"
+                      name="Asegurado" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Nombre Asegurado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Asegurado" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Referencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Referencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DescPaquete]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DescPaquete" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DescripcionMTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="61"
+                      name="DescripcionMTC" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Modelo]"
+                      dataType="i4"
+                      name="Modelo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Serie]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Serie" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Motor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Motor" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Propietario]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="Propietario" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoSiniestro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="TipoSiniestro" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[LimiteFecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="LimiteFecha" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoEndoso]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TipoEndoso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Placas]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Placas" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[MTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MTC" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[PrimaTotalInciso]"
+                      dataType="cy"
+                      name="PrimaTotalInciso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[Producto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[TipoPolizaInternacional]"
+                      codePage="1252"
+                      dataType="str"
+                      length="28"
+                      name="TipoPolizaInternacional" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[LineaNegocio]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="LineaNegocio" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DiasGracia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DiasGracia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[DiasProrroga]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DiasProrroga" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].ExternalColumns[AgrupacionNom]"
+                      codePage="1252"
+                      dataType="str"
+                      length="120"
+                      name="AgrupacionNom" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Tipo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Tipo]"
+                      name="Tipo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Dias]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Dias]"
+                      name="Dias" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Moneda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Moneda]"
+                      name="Moneda" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Plaza]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Plaza]"
+                      name="Plaza" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Ramo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Ramo]"
+                      name="Ramo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Clave]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Clave]"
+                      name="Clave" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Sucursal]"
+                      dataType="i2"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Sucursal]"
+                      name="Sucursal" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Poliza]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Poliza]"
+                      name="Poliza" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Endoso]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Endoso]"
+                      name="Endoso" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Inciso]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Inciso]"
+                      name="Inciso" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Recibo]"
+                      dataType="ui1"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Recibo]"
+                      name="Recibo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TotalRecibos]"
+                      dataType="ui1"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TotalRecibos]"
+                      name="TotalRecibos" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Prima Neta]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Prima Neta]"
+                      name="Prima Neta" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Recargo]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Recargo]"
+                      name="Recargo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Derechos]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Derechos]"
+                      name="Derechos" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Iva]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Iva]"
+                      name="Iva" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Comision]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Comision]"
+                      name="Comision" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Comison Sobre Recargo]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Comison Sobre Recargo]"
+                      name="Comison Sobre Recargo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Prima Total]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Prima Total]"
+                      name="Prima Total" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Forma de Pago]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Forma de Pago]"
+                      name="Forma de Pago" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Inicio Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Inicio Vigencia]"
+                      name="Inicio Vigencia" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fin Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fin Vigencia]"
+                      name="Fin Vigencia" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fecha Emision]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fecha Emision]"
+                      name="Fecha Emision" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Agente]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Agente]"
+                      name="Agente" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Agente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Agente]"
+                      name="Nombre Agente" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Conducto]"
+                      dataType="i2"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Conducto]"
+                      name="Conducto" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Conducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Conducto]"
+                      name="Nombre Conducto" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Asegurado]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Asegurado]"
+                      name="Asegurado" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Asegurado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Nombre Asegurado]"
+                      name="Nombre Asegurado" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      name="Fecha" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Referencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Referencia]"
+                      name="Referencia" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DescPaquete]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DescPaquete]"
+                      name="DescPaquete" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DescripcionMTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="61"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DescripcionMTC]"
+                      name="DescripcionMTC" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Modelo]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Modelo]"
+                      name="Modelo" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Serie]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Serie]"
+                      name="Serie" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Motor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Motor]"
+                      name="Motor" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Propietario]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Propietario]"
+                      name="Propietario" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoSiniestro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoSiniestro]"
+                      name="TipoSiniestro" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[LimiteFecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[LimiteFecha]"
+                      name="LimiteFecha" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoEndoso]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoEndoso]"
+                      name="TipoEndoso" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Placas]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Placas]"
+                      name="Placas" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[MTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[MTC]"
+                      name="MTC" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[PrimaTotalInciso]"
+                      dataType="cy"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[PrimaTotalInciso]"
+                      name="PrimaTotalInciso" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Producto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[Producto]"
+                      name="Producto" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoPolizaInternacional]"
+                      codePage="1252"
+                      dataType="str"
+                      length="28"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[TipoPolizaInternacional]"
+                      name="TipoPolizaInternacional" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[LineaNegocio]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[LineaNegocio]"
+                      name="LineaNegocio" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[AgrupacionNom]"
+                      codePage="1252"
+                      dataType="str"
+                      length="120"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[AgrupacionNom]"
+                      name="AgrupacionNom" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DiasGracia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DiasGracia]"
+                      name="DiasGracia" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DiasProrroga]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[DiasProrroga]"
+                      name="DiasProrroga" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Genera Archivo PrimLoca\PRIMLOCA"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="PRIMLOCA"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[PRIMLOCA]"
+                  connectionManagerRefId="Package.ConnectionManagers[PRIMLOCA]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Tipo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Tipo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Tipo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Tipo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Dias]"
+                      cachedDataType="i4"
+                      cachedName="Dias"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Dias]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Dias]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Moneda]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Moneda"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Moneda]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Moneda]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Plaza]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Plaza"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Plaza]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Plaza]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Ramo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Ramo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Ramo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Ramo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Clave]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Clave"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Clave]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Clave]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Sucursal]"
+                      cachedDataType="i2"
+                      cachedName="Sucursal"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Sucursal]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Sucursal]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Poliza]"
+                      cachedDataType="i4"
+                      cachedName="Poliza"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Poliza]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Poliza]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Endoso]"
+                      cachedDataType="i4"
+                      cachedName="Endoso"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Endoso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Endoso]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Inciso]"
+                      cachedDataType="i4"
+                      cachedName="Inciso"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Inciso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inciso]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Recibo]"
+                      cachedDataType="ui1"
+                      cachedName="Recibo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Recibo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recibo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[TotalRecibos]"
+                      cachedDataType="ui1"
+                      cachedName="TotalRecibos"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TotalRecibos]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TotalRecibos]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Prima Neta]"
+                      cachedDataType="cy"
+                      cachedName="Prima Neta"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Prima Neta]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Neta]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Recargo]"
+                      cachedDataType="cy"
+                      cachedName="Recargo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Recargo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Recargo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Derechos]"
+                      cachedDataType="cy"
+                      cachedName="Derechos"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Derechos]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Derechos]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Iva]"
+                      cachedDataType="cy"
+                      cachedName="Iva"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Iva]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Iva]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Comision]"
+                      cachedDataType="cy"
+                      cachedName="Comision"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Comision]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comision]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Comison Sobre Recargo]"
+                      cachedDataType="cy"
+                      cachedName="Comison Sobre Recargo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Comison Sobre Recargo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Comison Sobre Recargo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Prima Total]"
+                      cachedDataType="cy"
+                      cachedName="Prima Total"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Prima Total]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Prima Total]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Forma de Pago]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="18"
+                      cachedName="Forma de Pago"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Forma de Pago]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Forma de Pago]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Inicio Vigencia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Inicio Vigencia"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Inicio Vigencia]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Inicio Vigencia]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Fin Vigencia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Fin Vigencia"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fin Vigencia]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fin Vigencia]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Fecha Emision]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Fecha Emision"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fecha Emision]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha Emision]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Agente]"
+                      cachedDataType="i4"
+                      cachedName="Agente"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Agente]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Agente]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Nombre Agente]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Nombre Agente"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Agente]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Agente]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Conducto]"
+                      cachedDataType="i2"
+                      cachedName="Conducto"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Conducto]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Conducto]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Nombre Conducto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Nombre Conducto"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Conducto]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Conducto]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Asegurado]"
+                      cachedDataType="i4"
+                      cachedName="Asegurado"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Asegurado]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Asegurado]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Nombre Asegurado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Nombre Asegurado"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Asegurado]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Nombre Asegurado]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Fecha]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="Fecha"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fecha]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Fecha]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Referencia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Referencia"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Referencia]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Referencia]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[DescPaquete]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DescPaquete"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DescPaquete]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescPaquete]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[DescripcionMTC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DescripcionMTC"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DescripcionMTC]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DescripcionMTC]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Modelo]"
+                      cachedDataType="i4"
+                      cachedName="Modelo"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Modelo]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Modelo]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Serie]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Serie"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Serie]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Serie]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Motor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Motor"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Motor]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Motor]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Propietario]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="Propietario"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Propietario]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Propietario]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[TipoSiniestro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="TipoSiniestro"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoSiniestro]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoSiniestro]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[LimiteFecha]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="LimiteFecha"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[LimiteFecha]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LimiteFecha]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[TipoEndoso]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="TipoEndoso"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoEndoso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoEndoso]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Placas]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Placas"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Placas]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Placas]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[MTC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="MTC"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[MTC]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[MTC]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[PrimaTotalInciso]"
+                      cachedDataType="cy"
+                      cachedName="PrimaTotalInciso"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[PrimaTotalInciso]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[PrimaTotalInciso]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[Producto]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Producto"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Producto]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[Producto]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[TipoPolizaInternacional]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="28"
+                      cachedName="TipoPolizaInternacional"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoPolizaInternacional]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[TipoPolizaInternacional]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[LineaNegocio]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="LineaNegocio"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[LineaNegocio]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[LineaNegocio]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[DiasGracia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DiasGracia"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DiasGracia]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasGracia]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[DiasProrroga]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DiasProrroga"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DiasProrroga]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[DiasProrroga]" />
+                    <inputColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].Columns[AgrupacionNom]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="120"
+                      cachedName="AgrupacionNom"
+                      externalMetadataColumnId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[AgrupacionNom]"
+                      lineageId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output].Columns[AgrupacionNom]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Tipo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Tipo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Dias]"
+                      dataType="i4"
+                      name="Dias" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Moneda]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Moneda" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Plaza]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Plaza" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Ramo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Ramo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Clave]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Clave" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Sucursal]"
+                      dataType="i2"
+                      name="Sucursal" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Poliza]"
+                      dataType="i4"
+                      name="Poliza" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Endoso]"
+                      dataType="i4"
+                      name="Endoso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Inciso]"
+                      dataType="i4"
+                      name="Inciso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Recibo]"
+                      dataType="ui1"
+                      name="Recibo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TotalRecibos]"
+                      dataType="ui1"
+                      name="TotalRecibos" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Prima Neta]"
+                      dataType="cy"
+                      name="Prima Neta" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Recargo]"
+                      dataType="cy"
+                      name="Recargo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Derechos]"
+                      dataType="cy"
+                      name="Derechos" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Iva]"
+                      dataType="cy"
+                      name="Iva" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Comision]"
+                      dataType="cy"
+                      name="Comision" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Comison Sobre Recargo]"
+                      dataType="cy"
+                      name="Comison Sobre Recargo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Prima Total]"
+                      dataType="cy"
+                      name="Prima Total" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Forma de Pago]"
+                      codePage="1252"
+                      dataType="str"
+                      length="18"
+                      name="Forma de Pago" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Inicio Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Inicio Vigencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fin Vigencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Fin Vigencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fecha Emision]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Fecha Emision" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Agente]"
+                      dataType="i4"
+                      name="Agente" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Agente]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Agente" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Conducto]"
+                      dataType="i2"
+                      name="Conducto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Conducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Conducto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Asegurado]"
+                      dataType="i4"
+                      name="Asegurado" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Nombre Asegurado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Nombre Asegurado" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Referencia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="Referencia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DescPaquete]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DescPaquete" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DescripcionMTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DescripcionMTC" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Modelo]"
+                      dataType="i4"
+                      name="Modelo" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Serie]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Serie" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Motor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Motor" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Propietario]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="Propietario" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoSiniestro]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="TipoSiniestro" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[LimiteFecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="LimiteFecha" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoEndoso]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TipoEndoso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Placas]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Placas" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[MTC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MTC" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[PrimaTotalInciso]"
+                      dataType="cy"
+                      name="PrimaTotalInciso" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[Producto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[TipoPolizaInternacional]"
+                      codePage="1252"
+                      dataType="str"
+                      length="28"
+                      name="TipoPolizaInternacional" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[LineaNegocio]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="LineaNegocio" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DiasGracia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DiasGracia" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[DiasProrroga]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DiasProrroga" />
+                    <externalMetadataColumn
+                      refId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input].ExternalColumns[AgrupacionNom]"
+                      codePage="1252"
+                      dataType="str"
+                      length="120"
+                      name="AgrupacionNom" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Genera Archivo PrimLoca.Paths[OLE DB Source Output]"
+              endId="Package\Genera Archivo PrimLoca\PRIMLOCA.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Genera Archivo PrimLoca\Cartera.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Obtener Config"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DelayValidation="True"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{1259D1BD-2308-4471-A4EE-2918A5460549}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Obtener Config">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Obtener Config\Obtiene conexion plaza"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0AE0FB22-33AB-45AE-965D-5C959356F3AB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Obtiene conexion plaza"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{222D5796-6C4A-4E76-A8DC-1B5BE5AE2366}"
+              SQLTask:SqlStatementSource="Select ConfiguredValue&#xA;From VW_SSIS_Configuracion WITH(NOLOCK)&#xA;Where ConfigurationFilter = 'SSIS_COB_Genera_Primloca'&#xA;And PackagePath = ? "
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ConfiguredValue"
+                SQLTask:DtsVariableName="User::sConnection" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::PackagePath"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Obtener Config\Obtiene Plaza"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F1AB97A3-2E4B-4660-AAD6-A2E307CAB786}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Obtiene Plaza"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{222D5796-6C4A-4E76-A8DC-1B5BE5AE2366}"
+              SQLTask:SqlStatementSource="DECLARE @intParametro INT&#xA;DECLARE @NombrePlaza NCHAR(30)&#xA;&#xA;SET @intParametro = ?&#xA;&#xA;IF (@intParametro = 1)&#xA;    BEGIN&#xA;        SET @NombrePlaza = 'Conexion Plaza Monterrey'&#xA;    END&#xA;IF (@intParametro = 2)&#xA;    BEGIN&#xA;        SET @NombrePlaza = 'Conexion Plaza Mexico'&#xA;    END&#xA;IF (@intParametro = 3)&#xA;    BEGIN&#xA;        SET @NombrePlaza = 'Conexion Plaza Guadalajara'&#xA;    END&#xA;IF (@intParametro = 4)&#xA;    BEGIN&#xA;        SET @NombrePlaza = 'Conexion Plaza Culiacan'&#xA;    END&#xA;&#xA;&#xA;SELECT  CONVERT(VARCHAR(500), ValorString) ParametroConexion&#xA;FROM  [dbo].[SSIS_Parametro] WITH(NOLOCK)&#xA;WHERE  Descripcion = @NombrePlaza"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ParametroConexion"
+                SQLTask:DtsVariableName="User::PackagePath" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::OficinaId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Obtener Config\Obtiene Ruta"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1C4BA8E3-102A-4716-8346-443F0A801E9E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Obtiene Ruta"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{222D5796-6C4A-4E76-A8DC-1B5BE5AE2366}"
+              SQLTask:SqlStatementSource="DECLARE @intParametro INT&#xA;DECLARE @RutaPlaza NCHAR(60)&#xA;&#xA;SET @intParametro = ?&#xA;&#xA;IF (@intParametro = 1)&#xA;    BEGIN&#xA;        SET @RutaPlaza= '\Package.Variables[User::PathFileMTY].Properties[Value]'&#xA;    END&#xA;IF (@intParametro = 2)&#xA;    BEGIN&#xA;        SET @RutaPlaza= '\Package.Variables[User::PathFileMEX].Properties[Value]'&#xA;    END&#xA;IF (@intParametro = 3)&#xA;    BEGIN&#xA;        SET @RutaPlaza= '\Package.Variables[User::PathFileGDL].Properties[Value]'&#xA;    END&#xA;&#xA;SELECT ConfiguredValue&#xA;FROM [Configuracion].[dbo].[vw_SSIS_configuracion]&#xA;WHERE ConfigurationFilter = 'SSIS_COB_Genera_Primloca'&#xA;AND PackagePath = @RutaPlaza"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::PathFile" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::OficinaId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Obtener Config.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{742960DF-F417-491D-8E72-2B0135F26A0D}"
+          DTS:From="Package\Obtener Config\Obtiene Plaza"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Obtener Config\Obtiene conexion plaza" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D45A379C-620C-42F1-B351-682632BFDD4D}"
+      DTS:From="Package\Obtener Config"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Carga PrimLoca" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DEA42406-F6FB-4654-A1F9-FC169DE08E62}"
+      DTS:From="Package\Carga PrimLoca"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Genera Archivo PrimLoca" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Carga PrimLoca"
+          TopLeft="582.5,189.5" />
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Genera Archivo PrimLoca"
+          TopLeft="561.5,277.5" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Obtener Config\Obtiene conexion plaza"
+          TopLeft="216.27777777778,13.44444444444" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Obtener Config\Obtiene Plaza"
+          TopLeft="17,12" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Obtener Config\Obtiene Ruta"
+          TopLeft="25.5,79.5" />
+        <EdgeLayout
+          Id="Package\Obtener Config.PrecedenceConstraints[Constraint 1]"
+          TopLeft="160,33.72222222222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="56.27777777778,0"
+              Start="0,0"
+              End="48.77777777778,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="48.77777777778,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="411,176"
+          Size="411,219"
+          Id="Package\Obtener Config"
+          TopLeft="73,143" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="484,252.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="98.5,-42"
+              Start="0,0"
+              End="91,-42">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.25,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="45.25,0"
+                    Point2="49.25,0"
+                    Point3="49.25,-4" />
+                  <mssgle:LineSegment
+                    End="49.25,-38" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.25,-38"
+                    Point2="49.25,-42"
+                    Point3="53.25,-42" />
+                  <mssgle:LineSegment
+                    End="91,-42" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="662.75,231.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="/************************************************************************************************/  &#xA;/* Modificado : Alberto Del Angel                                                                                                                        */  &#xA;/* Fecha :  18/Nov/2020                                                                                                                                    */  &#xA;/* Proyecto:   2020_237SBBAUCobranzaCajaSprint19                                                                                            */  &#xA;/* Descripción :Se Migra DTS a DTSX para agregar columnas AgrupacionNom, DiasGracia, DiasProrroga,StatusRecibo */  &#xA;/********************************************************************************************** */"
+          ParentId="Package"
+          Size="957,149"
+          Id="2a90cab2-5e38-4339-8c36-3c1354ad423e"
+          TopLeft="28.5,5.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="17.25"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Genera Archivo PrimLoca">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,44"
+          Id="Package\Genera Archivo PrimLoca\PRIMLOCA"
+          TopLeft="373,76" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Genera Archivo PrimLoca\Cartera"
+          TopLeft="73,78" />
+        <EdgeLayout
+          Id="Package\Genera Archivo PrimLoca.Paths[OLE DB Source Output]"
+          TopLeft="215,98.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="158,0"
+              Start="0,0"
+              End="150.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="150.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Genera Archivo PrimLoca\Cartera">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

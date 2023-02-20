@@ -1,0 +1,15 @@
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.deps.json
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.pdb
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.BusinessEntities.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.DataAccess.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.BusinessEntities.pdb
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\bin\Debug\netcoreapp3.1\Restaurant.Admin.DataAccess.pdb
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.csproj.AssemblyReference.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.AssemblyInfoInputs.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.AssemblyInfo.cs
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.csproj.CopyComplete
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessLogic\obj\Debug\netcoreapp3.1\Restaurant.Admin.BusinessLogic.pdb

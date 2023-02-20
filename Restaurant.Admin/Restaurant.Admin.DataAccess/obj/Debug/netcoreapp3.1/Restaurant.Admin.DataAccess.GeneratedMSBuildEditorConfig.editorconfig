@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Restaurant.Admin.DataAccess
+build_property.ProjectDir = C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.DataAccess\
