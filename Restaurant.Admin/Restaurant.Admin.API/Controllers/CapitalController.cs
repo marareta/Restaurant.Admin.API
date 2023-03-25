@@ -18,5 +18,13 @@ namespace Restaurant.Admin.API.Controllers
             BL.Capital proxy = new BL.Capital();
             return proxy.GuardarCapital(obj);
         }
+
+        [Route("ObtenerCapitalPorFecha")]
+        [HttpPost]
+        public List<BE.Capital> ObtenerCapitalPorFecha(BE.ReporteTemplate obj)
+        {
+            BL.Capital proxy = new BL.Capital();
+            return proxy.ObtenerCapitalPorFecha(obj);
+        }
     }
 }

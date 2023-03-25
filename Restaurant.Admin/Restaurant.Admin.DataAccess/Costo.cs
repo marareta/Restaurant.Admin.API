@@ -48,5 +48,89 @@ namespace Restaurant.Admin.DataAccess
 
             return retorno;
         }
+
+        public List<BE.Costo> ObtenerCostosPorFecha(BE.ReporteTemplate obj)
+        {
+            List<BE.Costo> retorno = new List<BE.Costo>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Costo_spSelCostosPorFecha", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_FechaInicial", MySqlDbType.DateTime, 12).Value = obj.FechaInicio;
+                    cmd.Parameters.Add("_FechaFinal", MySqlDbType.DateTime, 12).Value = obj.FechaFin;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.DatoEntero1;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.Costo tmp = new BE.Costo
+                                {
+                                    CostoId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("CostoId"))),
+                                    SubCuentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SubCuentaId"))),
+                                    SubCuenta = new BE.SubCuenta
+                                    {
+                                        SubCuentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SubCuentaId"))),
+                                        Descripcion = dr.GetString(dr.GetOrdinal("SubCuenta")),
+                                        CuentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("CuentaId"))),
+                                        Cuenta = new BE.Cuenta
+                                        {
+                                            CuentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("CuentaId"))),
+                                            Descripcion = dr.GetString(dr.GetOrdinal("Cuenta"))
+                                        }
+                                    },
+                                    Monto = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Monto"))),
+                                    Fecha = Convert.ToDateTime(dr.GetDateTime(dr.GetOrdinal("Fecha"))),
+                                    Factura = dr.GetString(dr.GetOrdinal("Factura")),
+                                    Descripcion = dr.GetString(dr.GetOrdinal("Descripcion")),
+                                    SucursalId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SucursalId"))),
+                                    Sucursal = new BE.Sucursal
+                                    {
+                                        SucursalId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SucursalId"))),
+                                        Nombre = dr.GetString(dr.GetOrdinal("Sucursal"))
+                                    },
+                                    UsuarioId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("UsuarioId"))),
+                                    Usuario = new BE.Usuario
+                                    {
+                                        UsuarioDatosGenerales = new BE.UsuarioDatosGenerales
+                                        {
+                                            Nombres = dr.GetString(dr.GetOrdinal("Nombre")),
+                                            ApellidoPaterno = dr.GetString(dr.GetOrdinal("ApellidoPaterno")),
+                                            ApellidoMaterno = dr.GetString(dr.GetOrdinal("ApellidoMaterno"))
+                                        }
+                                    },
+                                    FormaPagoId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("FormaPagoId"))),
+                                    FormaPago = new BE.FormaPago
+                                    {
+                                        FormaPagoId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("FormaPagoId"))),
+                                        Descripcion = dr.GetString(dr.GetOrdinal("FormaPago"))
+                                    },
+                                    CostoProveedor = new BE.CostoProveedor
+                                    {
+                                        ProveedorId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("ProveedorId"))),
+                                        Proveedor = new BE.Proveedor
+                                        {
+                                            ProveedorId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("ProveedorId"))),
+                                            Nombre = dr.GetString(dr.GetOrdinal("Proveedor")),
+                                            RFC = dr.GetString(dr.GetOrdinal("ProveedorRFC"))
+                                        }
+                                    }
+                                };
+
+                                retorno.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return retorno;
+        }
+
     }
 }

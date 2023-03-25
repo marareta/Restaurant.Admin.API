@@ -18,5 +18,13 @@ namespace Restaurant.Admin.API.Controllers
             BL.Gasto proxy = new BL.Gasto();
             return proxy.GuardarGasto(obj);
         }
+
+        [Route("ObtenerGastosPorFecha")]
+        [HttpPost]
+        public List<BE.Gasto> ObtenerGastosPorFecha(BE.ReporteTemplate obj)
+        {
+            BL.Gasto proxy = new BL.Gasto();
+            return proxy.ObtenerGastosPorFecha(obj);
+        }
     }
 }

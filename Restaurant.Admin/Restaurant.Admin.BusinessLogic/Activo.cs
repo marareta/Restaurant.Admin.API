@@ -18,5 +18,10 @@ namespace Restaurant.Admin.BusinessLogic
         {
             return data.GuardarActivo(obj);
         }
+
+        public List<BE.Activo> ObtenerActivosPorFecha(BE.ReporteTemplate obj)
+        {
+            return data.ObtenerActivosPorFecha(obj);
+        }
     }
 }

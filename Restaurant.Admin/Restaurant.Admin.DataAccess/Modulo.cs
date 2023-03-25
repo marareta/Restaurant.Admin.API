@@ -86,13 +86,13 @@ namespace Restaurant.Admin.DataAccess
             return lst;
         }
 
-        public List<BE.SubModulo> ObtenerSubModulos(BE.Modulo obj, BE.Usuario usuario)
+        public List<BE.SubModulo> ObtenerSubModulosPorUsuario(BE.Modulo obj, BE.Usuario usuario)
         {
             List<BE.SubModulo> lst = new List<BE.SubModulo>();
 
             using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
             {
-                using (MySqlCommand cmd = new MySqlCommand("Catalogo_spSelSubModulos", cn))
+                using (MySqlCommand cmd = new MySqlCommand("Catalogo_spSelSubModulosPorUsuario", cn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("_ModuloId", MySqlDbType.Int32, 12).Value = obj.ModuloId;
@@ -110,6 +110,39 @@ namespace Restaurant.Admin.DataAccess
                                     SubModuloId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SubModuloId"))),
                                     Descripcion = dr.GetString(dr.GetOrdinal("SubModulo")),
                                     Acceso = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("Acceso")))
+                                };
+                                lst.Add(tmp);
+                            }
+                        }
+                    }
+                }
+
+            }
+            return lst;
+        }
+
+        public List<BE.SubModulo> ObtenerSubModulos(BE.Modulo obj)
+        {
+            List<BE.SubModulo> lst = new List<BE.SubModulo>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Catalogo_spSelSubModulos", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_ModuloId", MySqlDbType.Int32, 12).Value = obj.ModuloId;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.SubModulo tmp = new BE.SubModulo
+                                {
+                                    SubModuloId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("SubModuloId"))),
+                                    Descripcion = dr.GetString(dr.GetOrdinal("SubModulo"))
                                 };
                                 lst.Add(tmp);
                             }

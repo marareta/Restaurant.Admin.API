@@ -18,5 +18,10 @@ namespace Restaurant.Admin.BusinessLogic
         {
             return data.GuardarCosto(obj);
         }
+
+        public List<BE.Costo> ObtenerCostosPorFecha(BE.ReporteTemplate obj)
+        {
+            return data.ObtenerCostosPorFecha(obj);
+        }
     }
 }

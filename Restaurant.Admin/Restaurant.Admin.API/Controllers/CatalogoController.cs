@@ -19,6 +19,14 @@ namespace Restaurant.Admin.API.Controllers
             return proxy.ObtenerSucursal();
         }
 
+        [Route("ObtenerModulos")]
+        [HttpPost]
+        public List<BE.Modulo> ObtenerModulos()
+        {
+            BL.Modulo proxy = new BL.Modulo();
+            return proxy.ObtenerModulos();
+        }
+
         [Route("ObtenerSubCuentasFinalesPorSubCuenta")]
         [HttpPost]
         public List<BE.SubCuentaFinal> ObtenerSubCuentasFinalesPorSubCuenta(BE.SubCuenta obj)

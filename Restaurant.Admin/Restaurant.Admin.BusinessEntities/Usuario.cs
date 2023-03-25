@@ -20,5 +20,6 @@ namespace Restaurant.Admin.BusinessEntities
         public List<Gasto> Gastos { get; set; }
         public List<Capital> Capitales { get; set; }
         public List<Activo> Activos { get; set; }
+        public List<UsuarioSucursal> UsuarioSucursales { get; set; }
     }
 }

@@ -20,6 +20,39 @@ namespace Restaurant.Admin.API.Controllers
             return data.ValidaUsuarioPassword(obj);
         }
 
+        [Route("ObtenerUsuariosParaSincronizacionConSucursal")]
+        [HttpPost]
+        public List<BE.Usuario> ObtenerUsuariosParaSincronizacionConSucursal(BE.Sucursal obj)
+        {
+            BL.Usuario data = new BL.Usuario();
+            return data.ObtenerUsuariosParaSincronizacionConSucursal(obj);
+        }
+
+        [Route("ValidarUsuarioExistente")]
+        [HttpPost]
+        public BE.UsuarioCredenciales ValidarUsuarioExistente(BE.Usuario obj)
+        {
+            BL.Usuario data = new BL.Usuario();
+            return data.ValidarUsuarioExistente(obj);
+        }
+
+        [Route("GuardarUsuario")]
+        [HttpPost]
+        public BE.Usuario GuardarUsuario(BE.Usuario obj)
+        {
+            BL.Usuario data = new BL.Usuario();
+            return data.GuardarUsuario(obj);
+        }
+
+        [Route("ObtenerUsuariosBusqueda")]
+        [HttpPost]
+        public List<BE.Usuario> ObtenerUsuariosBusqueda(BE.UsuarioCredenciales obj)
+        {
+            BL.Usuario data = new BL.Usuario();
+            return data.ObtenerUsuariosBusqueda(obj);
+        }
+
+
         [Route("ValidaUsuarioLogin")]
         [HttpPost]
         public BE.Usuario ValidaUsuarioLogin(BE.UsuarioCredenciales obj)

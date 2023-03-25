@@ -18,5 +18,10 @@ namespace Restaurant.Admin.BusinessLogic
         {
             return data.GuardarCapital(obj);
         }
+
+        public List<BE.Capital> ObtenerCapitalPorFecha(BE.ReporteTemplate obj)
+        {
+            return data.ObtenerCapitalPorFecha(obj);
+        }
     }
 }

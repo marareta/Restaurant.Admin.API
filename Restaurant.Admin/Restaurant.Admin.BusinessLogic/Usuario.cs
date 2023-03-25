@@ -14,11 +14,54 @@ namespace Restaurant.Admin.BusinessLogic
             this.data = new DC.Usuario();
         }
 
+        public BE.UsuarioCredenciales ValidarUsuarioExistente(BE.Usuario usuario)
+        {
+            return data.ValidarUsuarioExistente(usuario);
+        }
+
+        public List<BE.Usuario> ObtenerUsuariosBusqueda(BE.UsuarioCredenciales obj)
+        {
+            BusinessLogic.Modulo dataM = new BusinessLogic.Modulo();
+            List<BE.Usuario> retorno = data.ObtenerUsuariosBusqueda(obj);
+            foreach(var usu in retorno)
+            {
+                usu.UsuarioSucursales = data.ObtenerUsuariosSucursales(usu);
+                usu.UsuarioSubModulos = dataM.ObtenerSubModulosPorUsuario(usu);
+            }
+            return retorno;
+        }
+
+        public BE.Usuario GuardarUsuario(BE.Usuario obj)
+        {
+            BE.Usuario retorno = data.GuardarUsuario(obj);
+            data.EliminaUsuarioSucursal(obj);
+            foreach(var usuS in obj.UsuarioSucursales)
+            {
+                data.GuardaUsuarioSucursal(usuS, retorno);
+            }
+
+            return retorno;
+        }
+
+        public List<BE.Usuario> ObtenerUsuariosParaSincronizacionConSucursal(BE.Sucursal obj)
+        {
+            List<BE.Usuario> retorno = data.ObtenerUsuariosParaSincronizacionConSucursal(obj);
+            BusinessLogic.Modulo dataM = new Modulo();
+
+            foreach(var usu in retorno)
+            {
+                usu.UsuarioSubModulos = dataM.ObtenerSubModulosPorUsuario(usu);
+            }
+
+            return retorno;
+        }
+
         public BE.UsuarioCredenciales ValidaUsuarioPassword(BE.UsuarioCredenciales credenciales)
         {
             return data.ValidaUsuarioPassword(credenciales);
         }
 
+        
         public BE.Usuario ValidaUsuarioLogin(BE.UsuarioCredenciales credenciales)
         {
             DC.Modulo dataM = new DC.Modulo();

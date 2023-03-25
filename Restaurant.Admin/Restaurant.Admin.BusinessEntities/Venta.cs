@@ -14,6 +14,7 @@ namespace Restaurant.Admin.BusinessEntities
         public int SucursalId { get; set; }
         public string Comentarios { get; set; }
         public int VentaMatrizId { get; set; }
+        public int folio { get; set; }
 
 
         public Usuario Usuario { get; set; }

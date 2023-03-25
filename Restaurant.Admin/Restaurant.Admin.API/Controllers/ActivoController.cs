@@ -18,5 +18,13 @@ namespace Restaurant.Admin.API.Controllers
             BL.Activo proxy = new BL.Activo();
             return proxy.GuardarActivo(obj);
         }
+
+        [Route("ObtenerActivosPorFecha")]
+        [HttpPost]
+        public List<BE.Activo> ObtenerActivosPorFecha(BE.ReporteTemplate obj)
+        {
+            BL.Activo proxy = new BL.Activo();
+            return proxy.ObtenerActivosPorFecha(obj);
+        }
     }
 }

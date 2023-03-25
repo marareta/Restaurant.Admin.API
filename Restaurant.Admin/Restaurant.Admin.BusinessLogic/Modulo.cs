@@ -14,12 +14,28 @@ namespace Restaurant.Admin.BusinessLogic
             this.data = new DC.Modulo();
         }
 
+        public List<BE.UsuarioSubModulo> ObtenerSubModulosPorUsuario(BE.Usuario obj)
+        {
+            return data.ObtenerSubModulosPorUsuario(obj);
+        }
+
         public List<BE.Modulo> ObtenerUsuarioSubModulos(BE.Usuario usuario)
         {
             List<BE.Modulo> retorno = data.ObtenerModulos();
             foreach (var modulo in retorno)
             {
-                modulo.SubModulos = data.ObtenerSubModulos(modulo, usuario);
+                modulo.SubModulos = data.ObtenerSubModulosPorUsuario(modulo, usuario);
+            }
+
+            return retorno;
+        }
+
+        public List<BE.Modulo> ObtenerModulos()
+        {
+            List<BE.Modulo> retorno = data.ObtenerModulos();
+            foreach (var modulo in retorno)
+            {
+                modulo.SubModulos = data.ObtenerSubModulos(modulo);
             }
 
             return retorno;
