@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Admin.API", "Restaurant.Admin.API\Restaurant.Admin.API.csproj", "{C917E02B-E8AE-4171-9EB0-45D42559866A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.Admin.API", "Restaurant.Admin.API\Restaurant.Admin.API.csproj", "{C917E02B-E8AE-4171-9EB0-45D42559866A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Admin.BusinessEntities", "Restaurant.Admin.BusinessEntities\Restaurant.Admin.BusinessEntities.csproj", "{31F16370-90EC-4146-802B-8CE288888FB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.Admin.BusinessEntities", "Restaurant.Admin.BusinessEntities\Restaurant.Admin.BusinessEntities.csproj", "{31F16370-90EC-4146-802B-8CE288888FB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Admin.BusinessLogic", "Restaurant.Admin.BusinessLogic\Restaurant.Admin.BusinessLogic.csproj", "{5204A7A0-23F0-4B8E-81AD-13530E54AEC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.Admin.BusinessLogic", "Restaurant.Admin.BusinessLogic\Restaurant.Admin.BusinessLogic.csproj", "{5204A7A0-23F0-4B8E-81AD-13530E54AEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Admin.DataAccess", "Restaurant.Admin.DataAccess\Restaurant.Admin.DataAccess.csproj", "{D95838C8-F48D-4CCF-8B89-683A2DDBE34C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.Admin.DataAccess", "Restaurant.Admin.DataAccess\Restaurant.Admin.DataAccess.csproj", "{D95838C8-F48D-4CCF-8B89-683A2DDBE34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

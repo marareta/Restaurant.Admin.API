@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA07aXn1JAykqsnCteao2YeAAAAAACAAAAAAADZgAAwAAAABAAAAAGTHTjKwd5wHoQzn6sl7ZuAAAAAASAAACgAAAAEAAAAHmBbG/9pPlGUdwZZEfVfagoAAAAJZ/YzBv26mbys3h15uS+NpygOsGlzPeBgDx7B9nU8HczqQYcKg6VrBQAAACwtpYXPBp7c1kooaNq1pgY+jFL1Q==</EncryptedPassword>
+    <_PublishTargetUrl>ftp://www.ocacorral.com</_PublishTargetUrl>
+    <History>True|2023-06-18T14:30:15.4794095Z;True|2023-06-16T14:35:24.0360005-06:00;True|2023-06-15T17:11:06.5753392-06:00;True|2023-06-15T11:06:29.2476451-06:00;False|2023-06-13T09:40:22.5419888-06:00;True|2023-06-12T18:35:00.4595086-06:00;False|2023-06-12T18:34:22.9499925-06:00;True|2023-06-05T16:08:00.9254051-06:00;False|2023-06-05T16:07:12.7925396-06:00;True|2023-06-02T20:43:02.4048259-06:00;True|2023-06-02T15:42:20.0781795-06:00;False|2023-06-02T15:41:29.5404601-06:00;True|2023-06-02T15:24:17.4657161-06:00;True|2023-06-02T15:19:23.2718642-06:00;True|2023-06-02T15:10:02.1514726-06:00;False|2023-06-02T15:09:18.5537370-06:00;True|2023-06-02T15:04:26.0620424-06:00;False|2023-06-02T08:47:55.1073904-06:00;True|2023-05-26T22:35:04.8745184-06:00;True|2023-05-25T20:58:08.3515757-06:00;False|2023-05-25T10:02:34.2290492-06:00;True|2023-05-15T22:03:54.8153675-06:00;False|2023-05-15T22:03:00.9324758-06:00;True|2023-05-15T21:09:06.4106342-06:00;True|2023-05-15T20:38:19.3154332-06:00;True|2023-05-15T20:35:04.3009174-06:00;True|2023-05-15T20:29:27.1693768-06:00;True|2023-05-15T20:24:26.3453348-06:00;True|2023-05-15T20:14:38.4895180-06:00;True|2023-05-15T19:40:59.5810071-06:00;True|2023-05-10T20:35:44.3551841-06:00;True|2023-05-07T18:52:13.5550791-06:00;False|2023-04-03T08:56:42.7935255-06:00;True|2023-04-02T20:57:40.5541311-06:00;True|2023-04-01T00:00:28.0039971-06:00;True|2023-03-31T23:56:59.6530838-06:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>01/25/2023 08:48:16</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>01/25/2023 08:48:16</publishTime>
+    </File>
+    <File Include="BouncyCastle.Crypto.dll">
+      <publishTime>10/19/2021 06:53:34</publishTime>
+    </File>
+    <File Include="comerr64.dll">
+      <publishTime>12/06/2022 13:13:38</publishTime>
+    </File>
+    <File Include="Google.Protobuf.dll">
+      <publishTime>10/26/2022 08:46:18</publishTime>
+    </File>
+    <File Include="gssapi64.dll">
+      <publishTime>12/06/2022 13:13:38</publishTime>
+    </File>
+    <File Include="K4os.Compression.LZ4.dll">
+      <publishTime>09/11/2020 20:11:58</publishTime>
+    </File>
+    <File Include="K4os.Compression.LZ4.Streams.dll">
+      <publishTime>09/11/2020 20:11:58</publishTime>
+    </File>
+    <File Include="K4os.Hash.xxHash.dll">
+      <publishTime>07/03/2019 15:39:02</publishTime>
+    </File>
+    <File Include="k5sprt64.dll">
+      <publishTime>12/06/2022 13:13:38</publishTime>
+    </File>
+    <File Include="krb5_64.dll">
+      <publishTime>12/06/2022 13:13:38</publishTime>
+    </File>
+    <File Include="krbcc64.dll">
+      <publishTime>12/06/2022 13:13:38</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>08/29/2020 15:14:12</publishTime>
+    </File>
+    <File Include="MySql.Data.dll">
+      <publishTime>12/06/2022 13:23:00</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.API.deps.json">
+      <publishTime>06/18/2023 08:29:38</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.API.dll">
+      <publishTime>06/18/2023 08:29:37</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.API.exe">
+      <publishTime>06/18/2023 08:29:38</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.API.pdb">
+      <publishTime>06/18/2023 08:29:37</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.API.runtimeconfig.json">
+      <publishTime>05/15/2023 20:13:26</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.BusinessEntities.dll">
+      <publishTime>06/18/2023 08:29:36</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.BusinessEntities.pdb">
+      <publishTime>06/18/2023 08:29:36</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.BusinessLogic.dll">
+      <publishTime>06/18/2023 08:29:37</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.BusinessLogic.pdb">
+      <publishTime>06/18/2023 08:29:37</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.DataAccess.dll">
+      <publishTime>06/18/2023 08:29:36</publishTime>
+    </File>
+    <File Include="Restaurant.Admin.DataAccess.pdb">
+      <publishTime>06/18/2023 08:29:36</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 05:01:34</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>01/11/2023 00:48:18</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>01/11/2023 00:48:22</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>01/11/2023 00:49:00</publishTime>
+    </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>11/20/2017 12:09:04</publishTime>
+    </File>
+    <File Include="System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/19/2020 13:47:52</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 05:01:34</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>06/18/2023 08:29:40</publishTime>
+    </File>
+    <File Include="ZstdNet.dll">
+      <publishTime>12/06/2022 13:19:28</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

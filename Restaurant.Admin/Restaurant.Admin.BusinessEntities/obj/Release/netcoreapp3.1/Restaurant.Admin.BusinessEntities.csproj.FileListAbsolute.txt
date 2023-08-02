@@ -1,0 +1,10 @@
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\bin\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.deps.json
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\bin\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\bin\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.pdb
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.csproj.AssemblyReference.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.GeneratedMSBuildEditorConfig.editorconfig
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.AssemblyInfoInputs.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.AssemblyInfo.cs
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.csproj.CoreCompileInputs.cache
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.dll
+C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.BusinessEntities\obj\Release\netcoreapp3.1\Restaurant.Admin.BusinessEntities.pdb

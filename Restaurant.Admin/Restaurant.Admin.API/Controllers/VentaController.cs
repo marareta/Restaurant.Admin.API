@@ -27,5 +27,13 @@ namespace Restaurant.Admin.API.Controllers
             BL.Venta proxy = new BL.Venta();
             return proxy.ObtenerYearsDisponiblesVentas();
         }
+
+        [Route("GuardarCorteDiarioMatriz")]
+        [HttpPost]
+        public List<BE.CorteDiario> GuardarCorteDiarioMatriz(List<BE.CorteDiario> lst)
+        {
+            BL.Venta proxy = new BL.Venta();
+            return proxy.GuardarCorteDiario(lst);
+        }
     }
 }

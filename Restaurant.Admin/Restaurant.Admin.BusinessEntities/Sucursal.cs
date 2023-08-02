@@ -21,5 +21,8 @@ namespace Restaurant.Admin.BusinessEntities
         public List<Gasto> Gastos { get; set; }
         public List<Capital> Capitales { get; set; }
         public List<UsuarioSucursal> UsuarioSucursales { get; set; }
+        public List<Inventario> Inventarios { get; set; }
+        public List<Entrada> Entradas { get; set; }
+        public List<Traspaso> Traspasos { get; set; }
     }
 }

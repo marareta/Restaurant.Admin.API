@@ -14,6 +14,7 @@ namespace Restaurant.Admin.BusinessEntities
         public decimal IvaTotal { get; set; }
         public decimal Total { get; set; }
         public decimal Cambio { get; set; }
+        public decimal CostoEnvio { get; set; }
 
 
         public Venta Venta { get; set; }

@@ -37,5 +37,6 @@ namespace Restaurant.Admin.BusinessEntities
         public List<TipoComplemento> TipoComplementos { get; set; }
         public List<Complemento> Complementos { get; set; }
         public List<Ingrediente> Ingredientes { get; set; }
+        public List<Unidad> Unidades { get; set; }
     }
 }

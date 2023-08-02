@@ -68,6 +68,7 @@ namespace Restaurant.Admin.DataAccess
                     cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
                     cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
                     cmd.Parameters.Add("_Tipo", MySqlDbType.Int32, 12).Value = obj.DatoEntero1;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
 
                     cn.Open();
                     using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
@@ -78,7 +79,9 @@ namespace Restaurant.Admin.DataAccess
                             {
                                 BE.Venta tmp = new BE.Venta
                                 {
-                                    FechaVenta = new DateTime(obj.FechaInicio.Year, Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("MesId"))), 1),
+                                    VentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("ValorId"))),
+                                    FechaVenta = Convert.ToDateTime(dr.GetDateTime(dr.GetOrdinal("Fecha"))),
+                                    //FechaVenta = new DateTime(obj.FechaInicio.Year, Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("MesId"))), 1),
                                     VentaDetalle = new BE.VentaDetalle
                                     {
                                         Total = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Total")))
@@ -91,6 +94,138 @@ namespace Restaurant.Admin.DataAccess
                 }
             }
             retorno.Ventas = lst;
+            retorno.FechaInicio = obj.FechaInicio;
+            retorno.FechaFin = obj.FechaFin;
+            retorno.DatoEntero1 = obj.DatoEntero1;
+            retorno.SucursalId = obj.SucursalId;
+            
+            return retorno;
+        }
+
+        public List<BE.Venta> ObtenerVentasPorFechas(BE.ReporteTemplate obj)
+        {
+            List<BE.Venta> retorno = new List<BE.Venta>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Venta_spSelReporteVentasPorFechas", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
+                    cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.Venta tmp = new BE.Venta
+                                {
+                                    VentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("VentaId"))),
+                                    FechaVenta = Convert.ToDateTime(dr.GetDateTime(dr.GetOrdinal("FechaVenta"))),
+                                    //FechaVenta = new DateTime(obj.FechaInicio.Year, Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("MesId"))), 1),
+                                    VentaDetalle = new BE.VentaDetalle
+                                    {
+                                        Total = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Total")))
+                                    },
+                                    TipoVenta = new BE.TipoVenta
+                                    {
+                                        Descripcion = dr.GetString(dr.GetOrdinal("TipoVenta"))
+                                    }
+                                };
+                                retorno.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+            return retorno;
+        }
+
+        public List<BE.Venta> ObtenerVentasPorTipoVenta(BE.ReporteTemplate obj)
+        {
+            List<BE.Venta> retorno = new List<BE.Venta>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Venta_spSelReporteVentasPorTipoVenta", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
+                    cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.Venta tmp = new BE.Venta
+                                {
+                                    VentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("Cantidad"))),
+                                    VentaDetalle = new BE.VentaDetalle
+                                    {
+                                        Total = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Total")))
+                                    },
+                                    TipoVentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("TipoVentaId"))),
+                                    TipoVenta = new BE.TipoVenta
+                                    {
+                                        Descripcion = dr.GetString(dr.GetOrdinal("TipoVenta")),
+                                        TipoVentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("TipoVentaId")))
+                                    }
+                                };
+                                retorno.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+            return retorno;
+        }
+
+        public List<BE.Venta> ObtenerVentasTotalesPorDiaSemana(BE.ReporteTemplate obj)
+        {
+            List<BE.Venta> retorno = new List<BE.Venta>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Venta_spSelReporteVentasTotalesPorDiaSemana", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
+                    cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.Venta tmp = new BE.Venta
+                                {
+                                    VentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("NumeroDiaSemana"))),
+                                    VentaDetalle = new BE.VentaDetalle
+                                    {
+                                        Total = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Total")))
+                                    },
+                                    TipoVenta = new BE.TipoVenta
+                                    {
+                                        Descripcion = dr.GetString(dr.GetOrdinal("DiaSemana"))
+                                    }
+                                };
+                                retorno.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
             return retorno;
         }
 
@@ -105,7 +240,6 @@ namespace Restaurant.Admin.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
                     cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
-                    cmd.Parameters.Add("_Tipo", MySqlDbType.Int32, 12).Value = obj.DatoEntero1;
 
                     cn.Open();
                     using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
@@ -145,7 +279,45 @@ namespace Restaurant.Admin.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
                     cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
-                    cmd.Parameters.Add("_Tipo", MySqlDbType.Int32, 12).Value = obj.DatoEntero1;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                BE.VentaProducto tmp = new BE.VentaProducto
+                                {
+                                    ProductoId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("ProductoId"))),
+                                    Producto = new BE.Producto
+                                    {
+                                        ProductoId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("ProductoId"))),
+                                        DescripcionCorta = dr.GetString(dr.GetOrdinal("Producto"))
+                                    },
+                                    Cantidad = Convert.ToDecimal(dr.GetDecimal(dr.GetOrdinal("Cantidad")))
+                                };
+                                retorno.Add(tmp);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return retorno;
+        }
+
+        public List<BE.VentaProducto> ObtenerReporteVentasProductosVendidos(BE.ReporteTemplate obj)
+        {
+            List<BE.VentaProducto> retorno = new List<BE.VentaProducto>();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Venta_spSelReporteVentasProductosVendidos", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
+                    cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
 
                     cn.Open();
                     using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
@@ -185,7 +357,7 @@ namespace Restaurant.Admin.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("_FechaInicio", MySqlDbType.Date, 12).Value = obj.FechaInicio;
                     cmd.Parameters.Add("_FechaFin", MySqlDbType.Date, 12).Value = obj.FechaFin;
-                    cmd.Parameters.Add("_Tipo", MySqlDbType.Int32, 12).Value = obj.DatoEntero1;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
 
                     cn.Open();
                     using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))

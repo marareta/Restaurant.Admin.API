@@ -21,5 +21,6 @@ namespace Restaurant.Admin.BusinessEntities
         public List<CostoProveedor> CostosProveedor { get; set; }
         public List<GastoProveedor> GastosProveedor { get; set; }
         public List<ActivoProveedor> ActivosProveedor { get; set; }
+        public List<Entrada> Entradas { get; set; }
     }
 }

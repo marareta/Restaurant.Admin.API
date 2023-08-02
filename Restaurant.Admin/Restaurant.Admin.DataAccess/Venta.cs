@@ -60,6 +60,7 @@ namespace Restaurant.Admin.DataAccess
                     cmd.Parameters.Add("_EstatusId", MySqlDbType.Int32, 12).Value = obj.EstatusId;
                     cmd.Parameters.Add("_IvaTotal", MySqlDbType.Decimal, 12).Value = obj.VentaDetalle.IvaTotal;
                     cmd.Parameters.Add("_FechaVenta", MySqlDbType.DateTime, 12).Value = obj.FechaVenta;
+                    cmd.Parameters.Add("_CostoEnvio", MySqlDbType.Decimal, 12).Value = obj.VentaDetalle.CostoEnvio;
 
                     cn.Open();
                     using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
@@ -71,6 +72,45 @@ namespace Restaurant.Admin.DataAccess
                                 retorno = new BE.Venta
                                 {
                                     VentaId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("VentaMatrizId")))
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+
+            return retorno;
+        }
+
+        public BE.CorteDiario GuardarCorteDiario(BE.CorteDiario obj)
+        {
+            BE.CorteDiario retorno = new BE.CorteDiario();
+
+            using (MySqlConnection cn = new MySqlConnection(this.connectionString.ConnectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("Venta_spInsCortediarioMatriz", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("_CorteDiarioSucursalId", MySqlDbType.Int32, 12).Value = obj.CorteDiarioId;
+                    cmd.Parameters.Add("_SucursalId", MySqlDbType.Int32, 12).Value = obj.SucursalId;
+                    cmd.Parameters.Add("_Fecha", MySqlDbType.DateTime, 12).Value = obj.Fecha;
+                    cmd.Parameters.Add("_UsuarioId", MySqlDbType.Int32, 12).Value = obj.UsuarioId;
+                    cmd.Parameters.Add("_MontoInicial", MySqlDbType.Decimal, 12).Value = obj.MontoInicial;
+                    cmd.Parameters.Add("_MontoFinal", MySqlDbType.Decimal, 12).Value = obj.MontoFinal;
+                    cmd.Parameters.Add("_FechaRegistroMontoInicial", MySqlDbType.DateTime, 12).Value = obj.FechaRegistroMontoInicial;
+                    cmd.Parameters.Add("_FechaRegistroMontoFinal", MySqlDbType.DateTime, 12).Value = obj.FechaRegistroMontoFinal;
+                    cmd.Parameters.Add("_FormaPagoId", MySqlDbType.Int32, 12).Value = obj.FormaPagoId;
+
+                    cn.Open();
+                    using (MySqlDataReader dr = cmd.ExecuteReader(CommandBehavior.SingleResult))
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                retorno = new BE.CorteDiario
+                                {
+                                    CorteDiarioId = Convert.ToInt32(dr.GetInt32(dr.GetOrdinal("CorteDiarioId")))
                                 };
                             }
                         }

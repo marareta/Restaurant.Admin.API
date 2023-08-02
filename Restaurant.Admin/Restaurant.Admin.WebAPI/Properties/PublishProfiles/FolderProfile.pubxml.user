@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\github\Restaurant.Admin.API\Restaurant.Admin\Restaurant.Admin.WebAPI\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2023-04-02T00:46:10.4071060Z;True|2023-04-01T18:21:35.3986573-06:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

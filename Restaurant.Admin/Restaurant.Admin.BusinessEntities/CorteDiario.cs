@@ -14,6 +14,8 @@ namespace Restaurant.Admin.BusinessEntities
         public DateTime FechaRegistroMontoInicial { get; set; }
         public DateTime FechaRegistroMontoFinal { get; set; }
         public int FormaPagoId { get; set; }
+        public int SucursalId { get; set; }
+        public int CorteDiarioMatrizId { get; set; }
 
 
         public Usuario Usuario { get; set; }

@@ -23,6 +23,19 @@ namespace Restaurant.Admin.BusinessLogic
             return data.ObtenerYearsDisponiblesVentas();
         }
 
+        public List<BE.CorteDiario> GuardarCorteDiario(List<BE.CorteDiario> lst)
+        {
+            foreach(var obj in lst)
+            {
+                BE.CorteDiario tmp = data.GuardarCorteDiario(obj);
+                if(tmp.CorteDiarioId != 0)
+                {
+                    obj.CorteDiarioMatrizId = tmp.CorteDiarioId;
+                }
+            }
+            return lst;
+        }
+
         public List<BE.Venta> GuardarVentas(List<BE.Venta> lst)
         {
             foreach(var obj in lst)

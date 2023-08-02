@@ -9,6 +9,7 @@ namespace Restaurant.Admin.BusinessEntities
         public int Id { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
+        public int SucursalId { get; set; }
         public int DatoEntero1 { get; set; }
         public int DatoEntero2 { get; set; }
         public int DatoEntero3 { get; set; }
@@ -46,6 +47,10 @@ namespace Restaurant.Admin.BusinessEntities
         public string DatoString9 { get; set; }
         public string DatoString10 { get; set; }
         public List<Venta> Ventas { get; set; }
+        public List<Venta> Ventas2 { get; set; }
+        public List<Venta> Ventas3 { get; set; }
+        public List<Venta> Ventas4 { get; set; }
+        public List<Venta> Ventas5 { get; set; }
         public List<VentaProducto> Productos1 { get; set; }
         public List<VentaProducto> Productos2 { get; set; }
         public List<VentaProducto> Productos3 { get; set; }
